@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Bingo Card Generator</title>
 <style type="text/css">
 	label,input, select {
@@ -46,168 +47,201 @@
 	h1, form, #footer { display:none }
 </style>
 
-<script type="text/javascript" src="jquery-1.5.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript">
-// Generate Bingo Cards
-function generate() {
+/*jslint browser: true, devel: true */
+/* global $ */
 
-	// Check to make suer enough options are provided to fill the bingo card spaces
-	var spaces = $("#words").val().split(",").length;
-	if ( $("#freespace").val() ) spaces++;
-	if ( spaces < $("#width").val()*$("#height").val() )
-		alert("Warning: you do not have enough possible board options for the size of the board you selected!");
+var bingoGenerator = {
+    // Given an array, return the array minus any empty elements
+    removeEmptyElements: function (arr) {
+        "use strict";
+        var newArray = [], i = 0;
+        for (i = 0; i < arr.length; i += 1) {
+            if (arr[i]) {
+                newArray.push(arr[i]);
+            }
+        }
+        return newArray;
+    },
 
-	// Clear any previous results
-	$("#results").html("");
+    formatFreespace: function (str) {
+        "use strict";
+        return '<strong>' + str + '<div class="freespace">Free Space</div></strong>';
+    },
 
-	// Try to make nice printable pages -- we can fit about 10 pieces across and 6 down
-	var colsFilled = 0;
-	var rowsFilled = 1;
+    bingoCard: function (title, width, height, freespace, freespaceValue, freespaceRandom, list) {
+        "use strict";
+        var possibleSpaces, enoughSpaces, spaces, centerSquare, i, j, output;
+        possibleSpaces = bingoGenerator.removeEmptyElements(list.split(","));
 
-	// Loop over number of cards requested
-	for ( var i=0; i<document.getElementById("number").value; i++ ) {
+        // Two options for including random Free Space:
+        // Option 1: We don't have enough. Include in random placement.
+        // Option 2:- We have enough. Overwrite other option.
+        enoughSpaces = true;
+        if (possibleSpaces.length < width * height) {
+            enoughSpaces = false;
+        }
 
-		colsFilled++;
-		if ( colsFilled*$("#width").val() > 10 ) {
-			rowsFilled++;
-			if ( rowsFilled*$("#height").val() > 6 ) {
-				$("#results").append('<div class="break"></div>');
-				rowsFilled=1;
-			} else {
-				$("#results").append('<div class="clear"></div>');
-			}
-			colsFilled=1;
-		}
+        // Option 1
+        if (freespace === "true" && freespaceRandom === "true" && !enoughSpaces) {
+            possibleSpaces.push(bingoGenerator.formatFreespace(freespaceValue));
+        }
 
-		// Create bingo card
-		var b = new BingoCard(
-			$("#title").val(),
-			$("#width").val(),
-			$("#height").val(),
-			$("#freespace").val(),
-			$("#freespaceValue").val(),
-			$("#freespaceRandom").val(),
-			$("#words").val()
-		);
-	}
-	
-	// Jump to results
-	location.href='#results';
+        // Create a random selection of the possible values
+        spaces = [];
 
-}
+        // This works for squares with odd dimensions,, e.g. 3x3 or 5x5, but not for even squares or rectangles
+        // var centerSquare = Math.floor(width*height/2);
+        // We'll say center is the center row of the center column
+        centerSquare = Math.floor(height / 2) * width + Math.floor(width / 2);
 
-function formatFreespace(str) {
-	return '<strong>'+str+'<div class="freespace">Free Space</div></strong>';
-}
+        for (i = 0; i <= width * height; i += 1) {
+            if (i === centerSquare && freespace === "true" && freespaceRandom === "false") {
+                spaces.push(bingoGenerator.formatFreespace(freespaceValue));
+            } else {
+                spaces.push(possibleSpaces.splice(Math.floor(Math.random() * possibleSpaces.length), 1)[0]);
+            }
+        }
 
-function BingoCard(title,width,height,freespace,freespaceValue,freespaceRandom,list) {
-	var possibleSpaces = list.split(",");
-	
-	// Two options for including random Free Space:
-	// Option 1: We don't have enough. Include in random placement.
-	// Option 2:- We have enough. Overwrite other option.
-	var enoughSpaces = true;
-	if ( possibleSpaces.length < width*height )
-		enoughSpaces = false;
+        // Option 2
+        if (freespace === "true" && freespaceRandom === "true" && enoughSpaces) {
+            spaces[Math.floor(Math.random() * spaces.length)] = bingoGenerator.formatFreespace(freespaceValue);
+        }
 
-	// Option 1
-	if ( freespace=="true" && freespaceRandom=="true" && !enoughSpaces )
-		possibleSpaces.push(formatFreespace(freespaceValue));
-	
-	// Create a random selection of the possible values
-	var spaces = [];
+        // Output
+        output = '<table><thead><tr><th colspan="' + width + '">' + title + '</th></tr></thead>';
+        output += '<tbody>';
+        for (i = 0; i < height; i += 1) {
+            output += '<tr>';
+            for (j = 0; j < width; j += 1) {
+                output += '<td>' + spaces.shift() + '</td>';
+            }
+            output += '</tr>';
+        }
+        output += "</tbody></table>";
+        $("#results").append(output);
+    },
 
-	// This works for squares with odd dimensions,, e.g. 3x3 or 5x5, but not for even squares or rectangles
-	// var centerSquare = Math.floor(width*height/2);
-	// We'll say center is the center row of the center column
-	var centerSquare = Math.floor(height/2)*width + Math.floor(width/2);
+    // Generate Bingo Cards
+    generate: function () {
+        "use strict";
+        var colsFilled, rowsFilled, spaces, i;
 
-	for ( var i=0; i<=width*height; i++ ) {
-		if ( i==centerSquare && freespace=="true" && freespaceRandom=="false" ) 
-			spaces.push(formatFreespace(freespaceValue));
-		else
-			spaces.push(possibleSpaces.splice(Math.floor(Math.random()*possibleSpaces.length),1)[0]);
-	}
+        // Check to make sure enough options are provided to fill the bingo card spaces
+        spaces = bingoGenerator.removeEmptyElements($("#words").val().split(",")).length;
+        if ($("#freespace").val()) {
+            spaces += 1;
+        }
+        if (spaces < $("#width").val() * $("#height").val()) {
+            alert("Warning: you do not have enough possible board options for the size of the board you selected!");
+        }
 
-	// Option 2
-	if ( freespace=="true" && freespaceRandom=="true" && enoughSpaces )
-		spaces[Math.floor(Math.random()*spaces.length)] = formatFreespace(freespaceValue);
+        // Clear any previous results
+        $("#results").html("");
 
-	// Output
-	var output = '<table><thead><tr><th colspan="'+width+'">'+title+'</th></tr></thead>';
-	output += '<tbody>';
-	for ( var i=0; i<height; i++ ) {
-		output += '<tr>';
-		for ( var j=0; j<width; j++ ) 
-			output += '<td>'+ spaces.shift() +'</td>';
-		output += '</tr>';
-	}
-	output += "</tbody></table>";
-	$("#results").append(output);
+        // Try to make nice printable pages -- we can fit about 10 pieces across and 6 down
+        colsFilled = 0;
+        rowsFilled = 1;
 
-}
+        // Loop over number of cards requested
+        for (i = 0; i < document.getElementById("number").value; i += 1) {
 
-// Replace %2C with comma and + with spaces
-function urlUnencode(str) {
-	return str.replace(/%2C/g,",").replace(/\+/g," ");
-}
+            colsFilled += 1;
+            if (colsFilled * $("#width").val() > 10) {
+                rowsFilled += 1;
+                if (rowsFilled * $("#height").val() > 6) {
+                    $("#results").append('<div class="break"></div>');
+                    rowsFilled = 1;
+                } else {
+                    $("#results").append('<div class="clear"></div>');
+                }
+                colsFilled = 1;
+            }
 
-function parseQS() {
-	// Remove leading question mark ("?") and split into array of key/value pairs
-	var qsArray = location.search.slice(1).split("&");
-	// Initialize object to store key/value pairs
-	var json = {};
-	// Loop through key/value pairs and separate into keys and values
-	for ( var i = 0; i < qsArray.length; i++ ) {
-		var kv = qsArray[i].split("=");
-		var key = kv[0];
-		var val;
-		if ( kv.length == 1 ) val = key;
-		// A key may be present without a value, so set a placeholder value
-		else val = kv[1];
-		json[key] = val;
-	}
-	return json;
-}
+            // Create bingo card
+            bingoGenerator.bingoCard(
+                $("#title").val(),
+                $("#width").val(),
+                $("#height").val(),
+                $("#freespace").val(),
+                $("#freespaceValue").val(),
+                $("#freespaceRandom").val(),
+                $("#words").val()
+            );
+        }
 
-function checkQS() {
-	var qs = parseQS();
-	if ( !(qs.title===undefined) || !(qs.words===undefined) ) {
-		$("#intro").hide();
-		if ( !(qs.title===undefined) ) {
-			$("#title").attr("value",urlUnencode(qs.title));
-		}
-		if ( !(qs.words===undefined) ) {
-			$("#words").html(urlUnencode(qs.words));
-		}
-		if ( !(qs.freespace===undefined) ) {
-			document.getElementById("freespaceValue").selectedIndex = 0;
-			$("#freespaceValue").attr("value",urlUnencode(qs.freespace));
-			if ( !(qs.freespaceRandom===undefined) && qs.freespaceRandom==="true" ) {
-				document.getElementById("freespaceRandom").selectedIndex = 0;
-			}
-		} else {		
-			document.getElementById("freespaceValue").selectedIndex = 1;
-			$("#freespaceValue").attr("value","");
-		}
-		if ( !(qs.width===undefined) ) {
-			$("#width").attr("value",qs.width);
-		}
-		if ( !(qs.height===undefined) ) {
-			$("#height").attr("value",qs.height);
-		}
-		if ( !(qs.number===undefined) ) {
-			$("#number").attr("value",qs.number);
-		}
-	}
-	if ( !(qs.title===undefined) && !(qs.words===undefined) ) {
-		generate();
-	}
-}
+        // Jump to results
+        location.href = '#results';
 
-$(document).ready(checkQS);
+    },
 
+    // Replace %2C with comma and + with spaces
+    urlUnencode: function (str) {
+        "use strict";
+        return str.replace(/%2C/g, ",").replace(/\+/g, " ");
+    },
 
+    parseQS: function () {
+        "use strict";
+        var qsArray, json, i, kv, key, val;
+        // Remove leading question mark ("?") and split into array of key/value pairs
+        qsArray = location.search.slice(1).split("&");
+        // Initialize object to store key/value pairs
+        json = {};
+        // Loop through key/value pairs and separate into keys and values
+        for (i = 0; i < qsArray.length; i += 1) {
+            kv = qsArray[i].split("=");
+            key = kv[0];
+            if (kv.length === 1) {
+                val = key;
+            } else {
+                // A key may be present without a value, so set a placeholder value
+                val = kv[1];
+            }
+            json[key] = val;
+        }
+        return json;
+    },
+
+    checkQS: function () {
+        "use strict";
+        var qs = bingoGenerator.parseQS();
+        if (!(qs.title === undefined) || !(qs.words === undefined)) {
+            $("#intro").hide();
+            if (!(qs.title === undefined)) {
+                $("#title").attr("value", bingoGenerator.urlUnencode(qs.title));
+            }
+            if (!(qs.words === undefined)) {
+                $("#words").html(bingoGenerator.urlUnencode(qs.words));
+            }
+            if (!(qs.freespace === undefined)) {
+                document.getElementById("freespaceValue").selectedIndex = 0;
+                $("#freespaceValue").attr("value", bingoGenerator.urlUnencode(qs.freespace));
+                if (!(qs.freespaceRandom === undefined) && qs.freespaceRandom === "true") {
+                    document.getElementById("freespaceRandom").selectedIndex = 0;
+                }
+            } else {
+                document.getElementById("freespaceValue").selectedIndex = 1;
+                $("#freespaceValue").attr("value", "");
+            }
+            if (!(qs.width === undefined)) {
+                $("#width").attr("value", qs.width);
+            }
+            if (!(qs.height === undefined)) {
+                $("#height").attr("value", qs.height);
+            }
+            if (!(qs.number === undefined)) {
+                $("#number").attr("value", qs.number);
+            }
+        }
+        if (!(qs.title === undefined) && !(qs.words === undefined)) {
+            bingoGenerator.generate();
+        }
+    }
+};
+
+$(document).ready(bingoGenerator.checkQS);
 </script>
 </head>
 <body>
@@ -257,7 +291,7 @@ $(document).ready(checkQS);
 <div id="results"></div>
 
 <div id="footer">
-Questions? Comments? Contact chris @ osric . com
+<a href="/bingo-card-generator/faq.html">Questions?</a> Comments? Contact chris @ osric . com
 </div>
 
 </body>
