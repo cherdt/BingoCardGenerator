@@ -215,14 +215,14 @@ var bingoGenerator = {
             if (!(qs.words === undefined)) {
                 $("#words").html(bingoGenerator.urlUnencode(qs.words));
             }
-            if (!(qs.freespace === undefined)) {
-                document.getElementById("freespaceValue").selectedIndex = 0;
-                $("#freespaceValue").attr("value", bingoGenerator.urlUnencode(qs.freespace));
+            if (!(qs.freespace === undefined || qs.freespace === "false")) {
+                document.getElementById("freespace").selectedIndex = 0;
+                $("#freespaceValue").attr("value", bingoGenerator.urlUnencode(qs.freespaceValue));
                 if (!(qs.freespaceRandom === undefined) && qs.freespaceRandom === "true") {
                     document.getElementById("freespaceRandom").selectedIndex = 0;
                 }
             } else {
-                document.getElementById("freespaceValue").selectedIndex = 1;
+                document.getElementById("freespace").selectedIndex = 1;
                 $("#freespaceValue").attr("value", "");
             }
             if (!(qs.width === undefined)) {
@@ -262,7 +262,7 @@ $(document).ready(bingoGenerator.checkQS);
 				<option value="false">No</option>
 			</select>
 		</label>
-		<label>Free Space Text <input type="text" name="freespace" id="freespaceValue" value="Park Bench"></label>
+		<label>Free Space Text <input type="text" name="freespaceValue" id="freespaceValue" value="Park Bench"></label>
 		<label>Free Space Placement
 			<select name="freespaceRandom" id="freespaceRandom">
 				<option value="true">Random</option>
