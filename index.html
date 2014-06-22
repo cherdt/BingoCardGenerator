@@ -12,7 +12,7 @@
 	}
 	legend { font-weight: bold }
 	div.clear { clear:both; }
-	div.break { clear:both; page-break-after: always; }
+	div.break { clear:both; page-break-after:always; break-after:always; }
 	table {
 		background-color:black;
 		border-collapse:collapse;
@@ -53,6 +53,8 @@
 /* global $ */
 
 var bingoGenerator = {
+    pageBreaks: 'on', // automatically inserts a page break after every 2 cards
+
     // Given an array, return the array minus any empty elements
     removeEmptyElements: function (arr) {
         "use strict";
@@ -148,10 +150,10 @@ var bingoGenerator = {
         for (i = 0; i < document.getElementById("number").value; i += 1) {
 
             colsFilled += 1;
-            if (colsFilled * $("#width").val() > 10) {
+            if (bingoGenerator.pageBreaks === 'on' && colsFilled * $("#width").val() > 10) {
                 rowsFilled += 1;
                 if (rowsFilled * $("#height").val() > 6) {
-                    $("#results").append('<div class="break"></div>');
+                    $("#results").append('<div class="break">&nbsp;</div>');
                     rowsFilled = 1;
                 } else {
                     $("#results").append('<div class="clear"></div>');
@@ -234,6 +236,9 @@ var bingoGenerator = {
             if (!(qs.number === undefined)) {
                 $("#number").attr("value", qs.number);
             }
+        }
+        if (!(qs.pageBreaks === undefined)) {
+            bingoGenerator.pageBreaks = qs.pageBreaks;
         }
         if (!(qs.title === undefined) && !(qs.words === undefined)) {
             bingoGenerator.generate();

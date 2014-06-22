@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bingo Card Generator - Frequently Asked Questions</title>
+</head>
+<body>
+<h1>Frequently Asked Questions</h1>
+
+<h2>Where is the print button?</h2>
+<p>Just use your browser's print feature.</p>
+
+<h2>Why doesn't it print properly?</h2>
+<p>Great question! There are several possibilities:</p>
+<ul>
+<li>You are using Internet Explorer. Try any other browser. Here are some suggestions: <a href="http://www.getfirefox.com">Firefox</a>, <a href="http://www.google.com/chrome/">Chrome</a>, <a href="http://www.apple.com/safari/">Safari</a>, <a href="http://www.opera.com">Opera</a>.</li>
+<li>Do you have the page set to landscape orientation?</li>
+<li>Is the page set to print at 100% scale? (This option may depend on your printer driver.)</li>
+<li>Can you reduce the page margins?</li>
+<li>I designed the page with (Americentric) 11"x8.5" paper in mind--I have no idea how these dimensions will fit on other paper sizes.</li>
+</ul>
+<p>Printing has worked for me on a number of different computers attached to a number of different printers, but I understand that every printer is different and that most printers are designed specifically to frustrate users and raise their blood pressure. In the future I will try to include some options to help adjust the print size. Unfortunately, that may not be very soon.</p>
+
+<h2>Can I print one card per page?</h2>
+<p>Probably! If you increase your print margins enough, the next card should print on an entirely separate page.</p>
+
+<h2>Can I print four (or some number other than two) cards per page?</h2>
+<p>Maybe. I recently added a hidden option that removes the automatic page break after every 2 cards, but it is a little tricky. To enable this feature:</p>
+<ol>
+	<li>Generate your bingo cards as usual</li>
+	<li>Add this text to the URL, just after <strong>http://osric.com/bingo-card-generator/?</strong>: <pre>pageBreaks=off&amp;</pre></li>
+	<li>Reload the page</li>
+</ol>
+<p>By further adjusting the page margins and print scale, you may be able to print additional cards per page. Good luck!</p>
+
+<h2>Why are some of the characters are garbled?</h2>
+<p>If you are seeing things like %26, you are using a character that web browsers consider special and encode in this funny way. My suggestion, for right now at least, is to avoid those characters. If you send me an email and let me know which character is causing the problem, I should be able to fix it.</p>
+
+<h2>Why are some columns wider than others?</h2>
+<p>The bingo squares will not split a single word, so <em>supercalifragilisticexpialidocious</em> will likely stretch the squares. You can try putting hyphens in the word, which should help it extend to another line. Or you can try using shorter words! (I'm a big help, ain't I?)</p>
+
+<h2>How can I save my bingo cards?</h2>
+<p>All the information to create your bingo cards is stored in the URL (that is, the location bar or web address field) displayed in your browser after you click <em>Generate Bingo Cards</em>. You can bookmark that address, send it to a friend, link to it on Facebook, etc.</p>
+
+<h2>May I use my bingo cards for [insert purpose here]?</h2>
+<p>Absolutely! If you would like to share your interesting use-cases with me, I would be delighted to hear about it. I've heard from teachers, public health professionals, and business leaders who have found ways to put bingo cards to good use. And, of course, <a href="http://www.gawker.com">Gawker</a> used them for their Superbowl Half-Time game, <a href="http://gawker.com/5981034">Beyngo - Beyonc&eacute; Bingo</a>.</p>
+
+<h2>How many words do I need for [some number of cards]?</h2>
+<p>I think you are asking how many words you need so that no 2 cards can win with the same pattern. But I cannot answer that question, for these reasons:</p>
+<ul>
+<li>Each card is generated randomly, without taking previous cards into account. Even with hundreds of words, there is still a chance--although extremely unlikely--that the generator would produce multiple identical cards. Likewise, the generator may select a permutation of a previously used row, column, or diagonal for a new card.</li>
+<li>You cannot prevent 2 people from winning on the same turn unless each word exists only on one card! For example, if <strong><em>5</em></strong> is called, one person could have bingo with 1-2-3-4-<strong><em>5</em></strong> and another with <strong><em>5</em></strong>-6-7-8-9. Most bingo halls have rules pertaining to what happens when 2 people win on the same turn (e.g. prizes for both, or a shared prize).</li>
+</ul>
+
+<p>Thanks again for visiting the <a href="index.html">Bingo Card Generator</a>! As always, you can reach me at chris @ osric . com</p>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-19082249-1', 'osric.com');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
