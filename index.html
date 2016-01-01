@@ -181,7 +181,7 @@ var bingoGenerator = {
     // Replace %2C with comma and + with spaces
     urlUnencode: function (str) {
         "use strict";
-        return decodeURI(str).replace(/%2C/g, ",").replace(/\+/g, " ");
+        return decodeURI(str).replace(/%26/g, "&").replace(/%2F/g, "/").replace(/%2C/g, ",").replace(/%3A/g, ":").replace(/\+/g, " ").replace(/%2B/g, "+");
     },
 
     parseQS: function () {

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bingo Call Generator</title>
+<style type="text/css">
+	label { display:block; font-weight: bold; }
+    .column { background:#eee; float:left; margin-right:1em; padding:0em 1em; width:20em; }
+    .prominent { font-size:3em; margin:1em; text-align: center; }
+    #currentCall { margin-bottom:.5em;}
+	#footer { border-top:1px solid #ccc; }
+    #nextCall { font-size:1em; }
+    #wordList { clear:both; }
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+/*jslint browser: true, devel: true */
+/* global $ */
+
+var callGenerator = {
+	words: [],
+
+    build: function () {
+    	"use strict";
+    	var word;
+    	$("#yetToCall").html("");
+    	for (word in this.words) {
+    		$("#yetToCall").append("<li>" + this.words[word] + "</li>");
+    	}
+    },
+
+    reset: function () {
+    	"use strict";
+    	var word;
+    	$("#currentCall").html("[no calls yet]");
+    	$("#called").html("");
+    	$("#yetToCall").html("");
+    	this.words = $("#words")[0].value.split(",");
+    	this.build();
+    },
+
+    call: function () {
+    	"use strict";
+    	var word = "";
+    	if (this.words.length === 0) {
+    		$("#currentCall").html("[no items left to call!]");
+    	}
+    	else {
+    	    word =this.words.splice(Math.floor(Math.random() * this.words.length), 1);
+    	    $("#currentCall").html(word);
+    	    $("#called").append("<li>" + word + "</li>");
+    	    this.build();
+        }
+    },
+
+    // Replace %2C with comma and + with spaces
+    urlUnencode: function (str) {
+        "use strict";
+        return decodeURI(str).replace(/%2C/g, ",").replace(/\+/g, " ");
+    },
+
+    parseQS: function () {
+        "use strict";
+        var qsArray, json, i, kv, key, val;
+        // Remove leading question mark ("?") and split into array of key/value pairs
+        qsArray = location.search.slice(1).split("&");
+        // Initialize object to store key/value pairs
+        json = {};
+        // Loop through key/value pairs and separate into keys and values
+        for (i = 0; i < qsArray.length; i += 1) {
+            kv = qsArray[i].split("=");
+            key = kv[0];
+            if (kv.length === 1) {
+                val = key;
+            } else {
+                // A key may be present without a value, so set a placeholder value
+                val = kv[1];
+            }
+            json[key] = val;
+        }
+        return json;
+    },
+
+    checkQS: function () {
+        "use strict";
+        var qs = this.parseQS();
+        if (!(qs.words === undefined)) {
+            $("#words").html(this.urlUnencode(qs.words));
+        }
+    }
+}
+
+$(document).ready(function() {
+    callGenerator.checkQS();
+    callGenerator.reset()
+});
+
+</script>
+
+</head>
+<body>
+<h1>Bingo Call Generator</h1>
+
+<div class="prominent">
+	<div id="currentCall">[no calls yet]</div>
+
+	<form onsubmit="callGenerator.call(); return false;">
+		<label><input type="submit" value="Next Call" id="nextCall"></label>
+	</form>
+</div>
+
+<div class="column">
+	<h2>Called</h2>
+	<ol id="called"></ol>
+</div>
+
+<div class="column">
+	<h2>Yet to call</h2>
+	<ol id="yetToCall"></ol>
+</div>
+
+<form id="wordList">
+	<label>Word List (separated by commas)</label>
+	<textarea cols="60" rows="8" name="words" id="words">B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14,B15,I16,I17,I18,I19,I20,I21,I22,I23,I24,I25,I26,I27,I28,I29,I30,N31,N32,N33,N34,N35,N36,N37,N38,N39,N40,N41,N42,N43,N44,N45,G46,G47,G48,G49,G50,G51,G52,G53,G54,G55,G56,G57,G58,G59,G60,O61,O62,O63,O64,O65,O66,O67,O68,O69,O70,O71,O72,O73,O74,O75</textarea>
+	<label><input type="button" value="Reset" onclick="callGenerator.reset()"></label>
+</form>
+
+<div id="footer">
+	<a href="/bingo-card-generator/faq.html">Questions?</a> Comments? Contact chris @ osric . com
+</div>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19082249-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</body>
+</html>
