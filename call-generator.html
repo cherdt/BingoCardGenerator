@@ -54,10 +54,10 @@ var callGenerator = {
         }
     },
 
-    // Replace %2C with comma and + with spaces
+    // Replace + with spaces, URL-decode &/,:+=?%
     urlUnencode: function (str) {
         "use strict";
-        return decodeURI(str).replace(/%2C/g, ",").replace(/\+/g, " ");
+        return decodeURI(str).replace(/%26/g, "&").replace(/%2F/g, "/").replace(/%2C/g, ",").replace(/%3A/g, ":").replace(/\+/g, " ").replace(/%2B/g, "+").replace(/%3D/g, "=").replace(/%3F/g, "?").replace(/%25/g, "%");
     },
 
     parseQS: function () {
