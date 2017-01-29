@@ -1,0 +1,33 @@
+input {
+	display: block;
+	float: left;
+	position: relative;
+}
+
+label {
+	display: block;
+	clear: both;
+	float: left;
+    margin:.3em 0;
+    width: 8em;
+}
+
+legend {
+	font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid black;
+}
+
+th {
+    padding: 0 1em;
+}
+
+#runSimulation {
+	font-size: large;
+}

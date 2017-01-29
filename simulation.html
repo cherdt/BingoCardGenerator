@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bingo Simulator</title>
+    <link rel="stylesheet" href="simulation.css">
+</head>
+
+<body>
+
+<h1>Bingo Simulator</h1>
+
+<p>This tries to help answer the question, "how many different items do I need to include if <em><strong>n</strong></em> people are playing so that no one wins on the same bingo call?"</p>
+<p>The real answer is, there's no guarantee of anything if the cards and the calls are randomly generated. But this simulation will give you a sense of the probabilities. This assumes a 5x5 bingo card without free spaces.</p>
+<p>See <a href="/bingo-card-generator/faq.html">Bingo Card Generator - Frequently Asked Questions</a> for details.</p>
+
+<form onsubmit="BINGO.runSimulation(1000); return false;">
+    <fieldset>
+    	<legend>Simulation Parameters</legend>
+		<label for="items"># of items</label> <input type="text" name="items" id="items" value="25" size="3">
+		<label for="cards"># of cards/players</label> <input type="text" name="cards" id="cards" value="25" size="3">
+		<label><input id="runSimulation" type="submit" value="Run Simulation"></label>
+    </fieldset>
+</form>
+
+<p>(This may be slow if you have a lot of items and/or cards!)</p>
+
+<h2>Results of 1000 simulated games (<span id="numberOfItems"></span> items, <span id="numberOfCards"></span> players)</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Calls</th>
+			<th>average (mean) # of winning cards per simulation</th>
+			<th>% chance of a winner on this call</th>
+			<th>% chance of a winner by this call</th>
+		</tr>
+	</thead>
+	<tfoot></tfoot>
+	<tbody id="simulationResults">
+
+	</tbody>
+</table>
+
+<script type="text/javascript" src="simulation.js"></script>
+<script type="text/javascript">
+	BINGO.runSimulation(1000);
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-19082249-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
