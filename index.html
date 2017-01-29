@@ -67,12 +67,12 @@ var bingoGenerator = {
         return newArray;
     },
 
-    formatFreespace: function (str) {
+    formatFreespace: function (str, subheading) {
         "use strict";
-        return '<strong>' + str + '<div class="freespace">Free Space</div></strong>';
+        return '<strong>' + str + '<div class="freespace">' + subheading + '</div></strong>';
     },
 
-    bingoCard: function (title, width, height, freespace, freespaceValue, freespaceRandom, list) {
+    bingoCard: function (title, width, height, freespace, freespaceValue, freespaceSubheadingValue, freespaceRandom, list) {
         "use strict";
         var possibleSpaces, enoughSpaces, spaces, centerSquare, i, j, output;
         possibleSpaces = bingoGenerator.removeEmptyElements(list.split(","));
@@ -87,7 +87,7 @@ var bingoGenerator = {
 
         // Option 1
         if (freespace === "true" && freespaceRandom === "true" && !enoughSpaces) {
-            possibleSpaces.push(bingoGenerator.formatFreespace(freespaceValue));
+            possibleSpaces.push(bingoGenerator.formatFreespace(freespaceValue, freespaceSubheadingValue));
         }
 
         // Create a random selection of the possible values
@@ -100,7 +100,7 @@ var bingoGenerator = {
 
         for (i = 0; i <= width * height; i += 1) {
             if (i === centerSquare && freespace === "true" && freespaceRandom === "false") {
-                spaces.push(bingoGenerator.formatFreespace(freespaceValue));
+                spaces.push(bingoGenerator.formatFreespace(freespaceValue, freespaceSubheadingValue));
             } else {
                 spaces.push(possibleSpaces.splice(Math.floor(Math.random() * possibleSpaces.length), 1)[0]);
             }
@@ -108,7 +108,7 @@ var bingoGenerator = {
 
         // Option 2
         if (freespace === "true" && freespaceRandom === "true" && enoughSpaces) {
-            spaces[Math.floor(Math.random() * spaces.length)] = bingoGenerator.formatFreespace(freespaceValue);
+            spaces[Math.floor(Math.random() * spaces.length)] = bingoGenerator.formatFreespace(freespaceValue, freespaceSubheadingValue);
         }
 
         // Output
@@ -168,6 +168,7 @@ var bingoGenerator = {
                 $("#height").val(),
                 $("#freespace").val(),
                 $("#freespaceValue").val(),
+                $("#freespaceSubheadingValue").val(),
                 $("#freespaceRandom").val(),
                 $("#words").val()
             );
@@ -181,7 +182,7 @@ var bingoGenerator = {
     // Replace + with spaces, URL-decode &/,:+=?%$
     urlUnencode: function (str) {
         "use strict";
-        return decodeURI(str).replace(/%24/g, "$").replace(/%25/g, "%").replace(/%26/g, "&").replace(/%2B/g, "+").replace(/\+/g, " ").replace(/%2C/g, ",").replace(/%2F/g, "/").replace(/%3A/g, ":").replace(/%3D/g, "=").replace(/%3F/g, "?");
+        return decodeURI(str).replace(/\+/g, " ").replace(/%24/g, "$").replace(/%25/g, "%").replace(/%26/g, "&").replace(/%2B/g, "+").replace(/%2C/g, ",").replace(/%2F/g, "/").replace(/%3A/g, ":").replace(/%3D/g, "=").replace(/%3F/g, "?");
     },
 
     parseQS: function () {
@@ -215,11 +216,16 @@ var bingoGenerator = {
                 $("#title").val(bingoGenerator.urlUnencode(qs.title));
             }
             if (!(qs.words === undefined)) {
-                $("#words").html(bingoGenerator.urlUnencode(qs.words));
+                $("#words").val(bingoGenerator.urlUnencode(qs.words));
             }
             if (!(qs.freespace === undefined || qs.freespace === "false")) {
                 document.getElementById("freespace").selectedIndex = 0;
                 $("#freespaceValue").val(bingoGenerator.urlUnencode(qs.freespaceValue));
+                if (!(qs.freespaceSubheadingValue === undefined)) {
+                    $("#freespaceSubheadingValue").val(bingoGenerator.urlUnencode(qs.freespaceSubheadingValue));
+                } else {
+                    $("#freespaceSubheadingValue").val("Free Space");
+                }
                 if (!(qs.freespaceRandom === undefined) && qs.freespaceRandom === "true") {
                     document.getElementById("freespaceRandom").selectedIndex = 0;
                 }
@@ -268,6 +274,7 @@ $(document).ready(bingoGenerator.checkQS);
 			</select>
 		</label>
 		<label>Free Space Text <input type="text" name="freespaceValue" id="freespaceValue" value="Park Bench"></label>
+        <label>Free Space Description <input type="text" name="freespaceSubheadingValue" id="freespaceSubheadingValue" value="Free Space"></label>
 		<label>Free Space Placement
 			<select name="freespaceRandom" id="freespaceRandom">
 				<option value="true">Random</option>

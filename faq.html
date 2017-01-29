@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Bingo Card Generator - Frequently Asked Questions</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bingo Card Generator - Frequently Asked Questions</title>
 </head>
 <body>
 <h1>Frequently Asked Questions</h1>
 
-<h2>Where is the print button?</h2>
+<ol>
+	<li><a href="#printbutton">Where is the print button?</a></li>
+	<li><a href="#printproblems">Why doesn't it print properly?</a></li>
+	<li><a href="#printbackground">Can I print the card headers without the black background?</a></li>
+	<li><a href="#printonecardperpage">Can I print one card per page?</a></li>
+	<li><a href="#printmorecardsperpage">Can I print four (or some number other than two) cards per page?</a></li>
+	<li><a href="#changefont">Can I change the font?</a></li>
+	<li><a href="#images">Can I make bingo cards with graphics/pictures/images?</a></li>
+	<li><a href="#callgenerator">How do I call out the bingo numbers/words/phrases?</a></li>
+	<li><a href="#garbledcharacters">Why are some of the characters are garbled?</a></li>
+	<li><a href="#columnwidths">Why are some columns wider than others?</a></li>
+	<li><a href="#savecards">How can I save my bingo cards?</a></li>
+	<li><a href="#customfreespace">Can I customize or remove the Free Space text?</a></li>
+	<li><a href="#othercustomizations">Can I make other customizations?</a></li>
+	<li><a href="#combinations">How many words do I need for [some number] of cards?</a></li>
+	<li><a href="#permission">May I use my bingo cards for [insert purpose here]?</a></li>
+	<li><a href="#contribute">Can I make a contribution to the bingo card generator?</a></li> 
+</ol>
+
+<h2 id="printbutton">Where is the print button?</h2>
 <p>Just use your browser's print feature.</p>
 
-<h2>Why doesn't it print properly?</h2>
+<h2 id="printproblems">Why doesn't it print properly?</h2>
 <p>Great question! There are several possibilities:</p>
 <ul>
 <li>You are using Internet Explorer. Try any other browser. Here are some suggestions: <a href="http://www.getfirefox.com">Firefox</a>, <a href="http://www.google.com/chrome/">Chrome</a>, <a href="http://www.apple.com/safari/">Safari</a>, <a href="http://www.opera.com">Opera</a>.</li>
@@ -20,13 +41,13 @@
 </ul>
 <p>Printing has worked for me on a number of different computers attached to a number of different printers, but I understand that every printer is different and that most printers are designed specifically to frustrate users and raise their blood pressure. In the future I will try to include some options to help adjust the print size. Unfortunately, that may not be very soon.</p>
 
-<h2>Can I print the card headers without the black background?</h2>
+<h2 id="printbackground">Can I print the card headers without the black background?</h2>
 <p>Trying to save ink? Good idea! First of all, check the Print Preview, as many browsers will do this for you automatically. If not, most web browsers should allow you to turn off background images and background colors for printing. Check your Page Setup options. Your browser should also then print the text in black ink.</p>
 
-<h2>Can I print one card per page?</h2>
+<h2 id="printonecardperpage">Can I print one card per page?</h2>
 <p>Probably! If you increase your print margins enough, the next card should print on an entirely separate page.</p>
 
-<h2>Can I print four (or some number other than two) cards per page?</h2>
+<h2 id="printmorecardsperpage">Can I print four (or some number other than two) cards per page?</h2>
 <p>Maybe. I recently added a hidden option that removes the automatic page break after every 2 cards, but it is a little tricky. To enable this feature:</p>
 <ol>
 	<li>Generate your bingo cards as usual</li>
@@ -35,31 +56,31 @@
 </ol>
 <p>By further adjusting the page margins and print scale, you may be able to print additional cards per page. Good luck!</p>
 
-<h2>Can I change the font?</h2>
+<h2 id="changefont">Can I change the font?</h2>
 <p>Yes, so long as you want the same font for everything. Most web browsers will let you change the default fonts. In Firefox, go to Tools--Options--Content. In Internet Explorer, go to Tools--Internet Options--Fonts.</p>
 
-<h2>Can I make bingo cards with graphics/pictures/images?</h2>
+<h2 id="images">Can I make bingo cards with graphics/pictures/images?</h2>
 <p>Yes! I recently created a new tool to help create bingo cards with images. You can't save or link to the image-based cards online, so you'll need to print them or take a screenshot. It's still experimental, but feel free to try it out: <a href="images.html">Bingo Cards with Images</a>. And let me know if it doesn't work or if you have suggestions for improvements: chris @ osric.com.</p>
 
-<h2>How do I call out the bingo numbers/words/phrases?</h2>
+<h2 id="callgenerator">How do I call out the bingo numbers/words/phrases?</h2>
 <p>See the <a href="call-generator.html">Bingo Call Generator</a>. You can copy-and-paste your selection into the Word List and click "Reset". Or you can change the index.html portion of the URL of your bingo cards to "call-generator.html" and it will be pre-populated with your selections.</p>
 
-<h2>Why are some of the characters are garbled?</h2>
+<h2 id="garbledcharacters">Why are some of the characters are garbled?</h2>
 <p>If you are seeing things like %26, you are using a character that web browsers consider special and encode in this funny way. My suggestion, for right now at least, is to avoid those characters. If you send me an email and let me know which character is causing the problem, I should be able to fix it.</p>
 
-<h2>Why are some columns wider than others?</h2>
+<h2 id="columnwidths">Why are some columns wider than others?</h2>
 <p>The bingo squares will not split a single word, so <em>supercalifragilisticexpialidocious</em> will likely stretch the squares. You can try putting hyphens in the word, which should help it extend to another line. Or you can try using shorter words! (I'm a big help, ain't I?)</p>
 
-<h2>How can I save my bingo cards?</h2>
+<h2 id="savecards">How can I save my bingo cards?</h2>
 <p>All the information to create your bingo cards is stored in the URL (that is, the location bar or web address field) displayed in your browser after you click <em>Generate Bingo Cards</em>. You can bookmark that address, send it to a friend, link to it on Facebook, etc.</p>
 
-<h2>Can I remove the Free Space text?</h2>
-<p>Currently, no. That is a frequent request and I hope to add an option to remove the <em>Free Space</em> text soon. In the meantime, several people have told me they have been able to customize cards by copying-and-pasting the cards into Microsoft Word or Excel and editing them there.</p>
+<h2 id="customfreespace">Can I customize or remove the Free Space text?</h2>
+<p>Yes! Thanks to everyone who let me know this was a feature they wanted. Especially helpful for people creating bingo cards in other languages.</p>
 
-<h2>May I use my bingo cards for [insert purpose here]?</h2>
-<p>Absolutely! If you would like to share your interesting use-cases with me, I would be delighted to hear about it. I've heard from teachers, public health professionals, and business leaders who have found ways to put bingo cards to good use. And, of course, <a href="http://www.gawker.com">Gawker</a> used them for their Superbowl Half-Time game, <a href="http://gawker.com/5981034">Beyngo - Beyonc&eacute; Bingo</a>.</p>
+<h2 id="othercustomizations">Can I make other customizations?</h2>
+<p>Several people have told me they have been able to make additional modifications and customizations by copying-and-pasting the cards into Microsoft Word or Excel and editing them there. I haven't tried myself, but you may find it useful.</p>
 
-<h2>How many words do I need for [some number] of cards?</h2>
+<h2 id="combinations">How many words do I need for [some number] of cards?</h2>
 <p>I think you are asking how many words you need so that no 2 cards can win with the same pattern. But I cannot answer that question, for these reasons:</p>
 <ul>
 <li>Each card is generated randomly, without taking previous cards into account. Even with hundreds of words, there is still a chance--although extremely unlikely--that the generator would produce multiple identical cards. Likewise, the generator may select a permutation of a previously used row, column, or diagonal for a new card.</li>
@@ -67,6 +88,13 @@
 </ul>
 
 <p>If you would like to <em>estimate</em> the chances of winning on a given turn, feel free to try the <a href="simulator.html">bingo game simulator</a>.</p>
+
+<h2 id="permission">May I use my bingo cards for [insert purpose here]?</h2>
+<p>Absolutely! If you would like to share your interesting use-cases with me, I would be delighted to hear about it. I've heard from teachers, public health professionals, and business leaders who have found ways to put bingo cards to good use. And, of course, <a href="http://www.gawker.com">Gawker</a> used them for their Superbowl Half-Time game, <a href="http://gawker.com/5981034">Beyngo - Beyonc&eacute; Bingo</a>.</p>
+
+<h2 id="contribute">Can I make a contribution to the bingo card generator?</h2>
+<p>Thank you, but I would prefer not to accept any money or gifts. I made this for fun and intend to keep it free and ad-free. I have been amazed at all the people around the world who have put it to good use. Feel free to drop me a short note to tell me how you used it -- it's always great to hear.</p>
+
 
 <p>Thanks again for visiting the <a href="index.html">Bingo Card Generator</a>! As always, you can reach me at chris @ osric . com</p>
 
