@@ -181,7 +181,7 @@ var bingoGenerator = {
     // Replace + with spaces, URL-decode &/,:+=?%$
     urlUnencode: function (str) {
         "use strict";
-        return decodeURI(str).replace(/%26/g, "&").replace(/%2F/g, "/").replace(/%2C/g, ",").replace(/%3A/g, ":").replace(/\+/g, " ").replace(/%2B/g, "+").replace(/%3D/g, "=").replace(/%3F/g, "?").replace(/%25/g, "%").replace(/%24/g, "$");
+        return decodeURI(str).replace(/%24/g, "$").replace(/%25/g, "%").replace(/%26/g, "&").replace(/%2B/g, "+").replace(/\+/g, " ").replace(/%2C/g, ",").replace(/%2F/g, "/").replace(/%3A/g, ":").replace(/%3D/g, "=").replace(/%3F/g, "?");
     },
 
     parseQS: function () {
@@ -212,29 +212,29 @@ var bingoGenerator = {
         if (!(qs.title === undefined) || !(qs.words === undefined)) {
             $("#intro").hide();
             if (!(qs.title === undefined)) {
-                $("#title").attr("value", bingoGenerator.urlUnencode(qs.title));
+                $("#title").val(bingoGenerator.urlUnencode(qs.title));
             }
             if (!(qs.words === undefined)) {
                 $("#words").html(bingoGenerator.urlUnencode(qs.words));
             }
             if (!(qs.freespace === undefined || qs.freespace === "false")) {
                 document.getElementById("freespace").selectedIndex = 0;
-                $("#freespaceValue").attr("value", bingoGenerator.urlUnencode(qs.freespaceValue));
+                $("#freespaceValue").val(bingoGenerator.urlUnencode(qs.freespaceValue));
                 if (!(qs.freespaceRandom === undefined) && qs.freespaceRandom === "true") {
                     document.getElementById("freespaceRandom").selectedIndex = 0;
                 }
             } else {
                 document.getElementById("freespace").selectedIndex = 1;
-                $("#freespaceValue").attr("value", "");
+                $("#freespaceValue").val("");
             }
             if (!(qs.width === undefined)) {
-                $("#width").attr("value", qs.width);
+                $("#width").val(qs.width);
             }
             if (!(qs.height === undefined)) {
-                $("#height").attr("value", qs.height);
+                $("#height").val(qs.height);
             }
             if (!(qs.number === undefined)) {
-                $("#number").attr("value", qs.number);
+                $("#number").val(qs.number);
             }
         }
         if (!(qs.pageBreaks === undefined)) {
