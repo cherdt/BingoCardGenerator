@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bingo Card Generator - Make Bingo Cards with Images</title>
+<style type="text/css">
+	table { border-collapse:collapse; }
+	td, th { border: solid 1px black; }
+	thead tr {
+		height:50px;
+		font-family:Arial,Helvetica;
+		font-size:24px;
+	}
+	tfoot tr th {
+		font-family:Arial,Helvetica;
+		font-size: xx-small;
+		font-weight: normal;
+	}
+	form {
+		margin-bottom: 1em;
+	}
+	label {
+		display: block;
+		font-weight: bold;
+		margin-top:1em;
+	}
+	#imageDrop {
+		background-color: #cee;
+		border: 2px solid #bdd;
+		width: 300px;
+		height: 100px;
+	}
+	.button {
+		background-color: #cee;
+		border: 2px solid #bdd;
+		font-size: large;
+	}
+</style>
+<style type="text/css" media="print">
+	#controls { display:none }
+</style>
+</head>
+<body>
+
+<div id="controls">
+	<h1>Create Bingo Cards with Images</h1>
+	<p>This does yet not work in Internet Explorer. Please try Firefox or Chrome.</p>
+	<p>Drag-and-drop image files (JPEG, GIF, PNG) from your computer below. You'll need at least 25 images to fill all the squares. Small images (try 128x128 or 150x150) that are approximately the same size work best.</p>
+	<p>When ready, click the <em>Generate Bingo Card</em> button. Currently this page creates just one bingo card at a time, but you can click the <em>Generate Bingo Card</em> button again to create more random cards with the same images.</p>
+	<p>Looking for other options? Try the classic <a href="/bingo-card-generator/">Bingo Card Generator</a> to create text-based cards that you can customize, save, and share online. If you have questions or suggestions, please see the <a href="/bingo-card-generator/faq.html">Frequently Asked Questions</a>.</p>
+	<div id="imageDrop" 
+	     ondragenter="document.getElementById('imageDrop').textContent = ''; event.stopPropagation(); event.preventDefault();"
+	     ondragover="event.stopPropagation(); event.preventDefault();"
+	     ondrop="event.stopPropagation(); event.preventDefault();
+	     BINGO.processDrop(event);"> drop images here (25 minimum)
+	</div>
+
+	<form onsubmit="BINGO.makeCard(); return false;">
+		<label>Card Title <input type="text" id="title" name="title" value="PICTURE BINGO!"></label>
+		<label><input value="Generate Bingo Card" type="submit" class="button"></label>
+	</form>
+</div>
+
+<table id="card">
+	<thead>
+		<tr>
+			<th colspan="5" id="bingo-header">PICTURE BINGO!</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th colspan="5">osric.com/bingo-card-generator/</th>
+		</tr>
+	</tfoot>
+	<tbody></tbody>
+</table>
+
+<div id="images" style="background-color:#ccc; display: none; float:right; width: 200px;"></div>
+
+<script type="text/javascript" src="images.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-19082249-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
