@@ -7,6 +7,6 @@
     "jshint": "^2.6.0"
   },
   "scripts": {
-    "test": "./node_modules/jshint/bin/jshint image.js"
+    "test": "./node_modules/jshint/bin/jshint images.js"
   }
 }
