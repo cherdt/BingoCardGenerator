@@ -1,5 +1,5 @@
 /*jslint
-    browser
+    browser: true
 */
 
 var BINGO = {
