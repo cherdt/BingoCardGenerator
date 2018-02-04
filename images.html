@@ -23,6 +23,12 @@
 		font-weight: bold;
 		margin-top:1em;
 	}
+	label.dimensions {
+		display: inline
+	}
+	.dimensions input {
+		width: 2em;
+	}
 	#imageDrop {
 		background-color: #cee;
 		border: 2px solid #bdd;
@@ -56,6 +62,8 @@
 
 	<form onsubmit="BINGO.makeCard(); return false;">
 		<label>Card Title <input type="text" id="title" name="title" value="PICTURE BINGO!"></label>
+		<label class="dimensions"># Squares Wide <input type="text" id="width" name="width" value="5"></label>
+		<label class="dimensions"># Squares Tall <input type="text" id="height" name="height" value="5"></label>
 		<label><input value="Generate Bingo Card" type="submit" class="button"></label>
 	</form>
 </div>

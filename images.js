@@ -5,6 +5,11 @@
 var BINGO = {
     images: [],
 
+    getValueFromElement: function (element) {
+        "use strict";
+        return parseInt(document.getElementById(element).value, 10);
+    },
+
     processDrop: function (event) {
         "use strict";
         var dt = event.dataTransfer;
@@ -70,9 +75,9 @@ var BINGO = {
         document.getElementById("bingo-header").textContent = document.getElementById("title").value;
         card = document.getElementsByTagName("tbody")[0];
         card.innerHTML = "";
-        for (i = 0; i < 5; i += 1) {
+        for (i = 0; i < this.getValueFromElement("height"); i += 1) {
             row = document.createElement("tr");
-            for (j = 0; j < 5; j += 1) {
+            for (j = 0; j < this.getValueFromElement("width"); j += 1) {
                 image = this.images.pop();
                 cell = document.createElement("td");
                 cell.appendChild(image);
