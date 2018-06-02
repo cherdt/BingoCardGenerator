@@ -8,6 +8,6 @@
     "qunit": "^2.6.1"
   },
   "scripts": {
-    "test": "sh .scripts/run-tests.sh"
+    "test": "sh ./scripts/run-tests.sh"
   }
 }
