@@ -5,7 +5,7 @@
   "version": "0.0.2",
   "devDependencies": {
     "jshint": "^2.6.0",
-    "quinit": "^2.6.1"
+    "qunit": "^2.6.1"
   },
   "scripts": {
     "jshint": "./node_modules/jshint/bin/jshint images.js",
