@@ -2,11 +2,13 @@
   "name": "BingoCardGenerator",
   "description": "Simple Travis-CI check for JSHint (Code Linting)",
   "author": "Chris Herdt",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "devDependencies": {
-    "jshint": "^2.6.0"
+    "jshint": "^2.6.0",
+    "quinit": "^2.6.1"
   },
   "scripts": {
-    "test": "./node_modules/jshint/bin/jshint images.js"
+    "jshint": "./node_modules/jshint/bin/jshint images.js",
+    "qunit": "./node_modules/qunit/bin/qunit"
   }
 }
