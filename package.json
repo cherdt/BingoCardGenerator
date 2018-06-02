@@ -8,7 +8,7 @@
     "qunit": "^2.6.1"
   },
   "scripts": {
-    "jshint": "./node_modules/jshint/bin/jshint images.js",
-    "qunit": "./node_modules/qunit/bin/qunit"
+    "test": "./node_modules/jshint/bin/jshint images.js",
+    "test": "./node_modules/qunit/bin/qunit"
   }
 }
