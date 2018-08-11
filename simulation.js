@@ -125,6 +125,7 @@ var BINGO = {
         var cards = parseInt(document.getElementById("cards").value, 10);
         var winners = 0;
         var winnerInRound;
+        var numberOfCalls;
         var i;
         var j;
         var w;
@@ -135,10 +136,11 @@ var BINGO = {
         document.getElementById("numberOfCards").textContent = cards;
         results.innerHTML = "";
         for (i = 0; i < items; i = i + 1) {
+            numberOfCalls = i + 1;
             w = 0;
             winners = 0;
             winnerInRound = 0;
-            this.createCard(i, items);
+            this.createCard(numberOfCalls, items);
             for (j = 0; j < n; j = j + 1) {
                 w = this.testCards(cards, i);
                 if (w > 0) {
@@ -151,7 +153,7 @@ var BINGO = {
             if (cumulativeProbability > 1) {
                 cumulativeProbability = 1;
             }
-            results.appendChild(this.createOutputRow(i + 1, winners / n, winnerInRound / n, cumulativeProbability));
+            results.appendChild(this.createOutputRow(numberOfCalls, winners / n, winnerInRound / n, cumulativeProbability));
             priorpPrime = 1 - winnerInRound / n;
         }
     }
