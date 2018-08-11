@@ -42,6 +42,40 @@
 		border-top:1px solid #ccc;
 		clear:both;
 	}
+
+    .daub {
+        background-repeat: no-repeat;
+    }
+    .daubPos1 {
+        background-position: 8px 8px;
+    }
+    .daubPos2 {
+        background-position: 3px 8px;
+    }
+    .daubPos3 {
+        background-position: 8px 3px;
+    }
+    .daubPos4 {
+        background-position: 12px 8px;
+    }
+    .daubPos5 {
+        background-position: 8px 12px;
+    }
+    .daubImg1 {
+        background-image: url(images/daub1.png);
+    }
+    .daubImg2 {
+        background-image: url(images/daub2.png);
+    }
+    .daubImg3 {
+        background-image: url(images/daub3.png);
+    }
+    .daubImg4 {
+        background-image: url(images/daub4.png);
+    }
+    .daubImg5 {
+        background-image: url(images/daub5.png);
+    }
 </style>
 <style type="text/css" media="print">
 	h1, form, #footer { display:none }
@@ -51,6 +85,37 @@
 <script type="text/javascript">
 /*jslint browser: true, devel: true */
 /* global $ */
+
+var dauber = {
+    // If the target bingo card square has a daub, remove it. Otherwise, add a daub
+    toggle: function (e) {
+        "use strict";
+        var i;
+        var target = e.currentTarget;
+        if (target.classList.contains("daub")) {
+            for (i = 1; i <= 5; i = i + 1) {
+                target.classList.remove("daubImg" + i);
+                target.classList.remove("daubPos" + i);
+            }
+            target.classList.remove("daub");
+        } else {
+            target.classList.add("daub");
+            target.classList.add("daubPos" + Math.ceil(Math.random() * 5));
+            target.classList.add("daubImg" + Math.ceil(Math.random() * 5));
+        }
+    },
+
+    // Iterate over any bingo cards on the page and attach mouse/touch events to each square
+    init: function () {
+        "use strict";
+        var bingoSquare;
+        var bingoSquares = document.getElementById("results").getElementsByTagName("td");
+        for (bingoSquare of bingoSquares) {
+            bingoSquare.addEventListener("mousedown", this.toggle);
+            bingoSquare.addEventListener("touchstart", this.toggle);       
+        }
+    }
+};
 
 var bingoGenerator = {
     pageBreaks: 'on', // automatically inserts a page break after every 2 cards
@@ -248,6 +313,7 @@ var bingoGenerator = {
         }
         if (!(qs.title === undefined) && !(qs.words === undefined)) {
             bingoGenerator.generate();
+            dauber.init();
         }
     }
 };
