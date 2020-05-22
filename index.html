@@ -5,44 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bingo Card Generator</title>
 <style type="text/css">
-	label,input, select {
-		display:block;
-	}
-	input,select {
-		margin-bottom:.5em;
-	}
-	legend { font-weight: bold }
-	div.clear { clear:both; }
-	div.break { clear:both; page-break-after:always; break-after:always; }
-	table {
-		background-color:black;
-		border-collapse:collapse;
-		margin-bottom:1em;
-		margin-right:1em;
-		float:left;
-	}
-	td, th {
-		border:1px solid black;
-		text-align:center;
-	}
-	th {
-		color:white;
-		height:50px;
-		font-family:Arial,Helvetica;
-		font-size:24px;
-	}
-	td {
-		background-color:white;
-		width:85px;
-		height:85px;
-	}
-	.freespace {
-		font-size:smaller;
-	}
-	#footer {
-		border-top:1px solid #ccc;
-		clear:both;
-	}
+    label,input, select {
+        display:block;
+    }
+    input,select {
+        margin-bottom:.5em;
+    }
+    legend { font-weight: bold }
+    div.clear { clear:both; }
+    div.break { clear:both; page-break-after:always; break-after:always; }
+    table {
+        background-color:black;
+        border-collapse:collapse;
+        margin-bottom:1em;
+        margin-right:1em;
+        float:left;
+    }
+    td, th {
+        border:1px solid black;
+        text-align:center;
+    }
+    th {
+        color:white;
+        height:50px;
+        font-family:Arial,Helvetica;
+        font-size:24px;
+    }
+    td {
+        background-color:white;
+        width:85px;
+        height:85px;
+    }
+    .freespace {
+        font-size:smaller;
+    }
+    #footer {
+        border-top:1px solid #ccc;
+        clear:both;
+    }
 
     .daub {
         background-repeat: no-repeat;
@@ -79,7 +79,7 @@
     }
 </style>
 <style type="text/css" media="print">
-	h1, form, #footer { display:none }
+    h1, form, #footer { display:none }
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -141,7 +141,7 @@ var bingoGenerator = {
         "use strict";
         var possibleSpaces, enoughSpaces, spaces, centerSquare, i, j, output;
         list = bingoGenerator.escapeHTML(list);
-	    list = bingoGenerator.newlineToBR(list);
+        list = bingoGenerator.newlineToBR(list);
         possibleSpaces = bingoGenerator.removeEmptyElements(list.split(","));
 
         // Two options for including random Free Space:
@@ -336,45 +336,44 @@ $(document).ready(bingoGenerator.checkQS);
 <body>
 <h1>Make your own bingo cards</h1>
 <form action="#results" method="get"><!-- onsubmit="generate();return false;" -->
-	<p id="intro">I've provided a sample to create bingo cards for a day in the park. You can enter your own settings to create your own custom bingo cards.</p>
-	<fieldset>
-		<legend>Bingo Card Basics</legend>
-		<label>Card Title <input type="text" name="title" id="title" value="Day in the Park Bingo"></label>
-		<label>Word List (separated by commas)</label><textarea cols="60" rows="8" name="words" id="words">Flowers,Bees,Picnickers,Ants,Little Kid Crying,Holding Hands,Person Napping,A Balloon,Dogs,Frisbee,Stroller,Chess Players,Rollerskates,Musician,Juggler,Photographer,Painter,Plastic Bag in Tree,Squirrel,Pigeon,Bicycle Built for Two,Ice Cream,Sunbather,Person Reading Newspaper,Person Listening to Radio,Sidewalk Chalk,Hopscotch</textarea>
-	</fieldset>	
+    <p id="intro">I've provided a sample to create bingo cards for a day in the park. You can enter your own settings to create your own custom bingo cards.</p>
+    <fieldset>
+        <legend>Bingo Card Basics</legend>
+        <label>Card Title <input type="text" name="title" id="title" value="Day in the Park Bingo"></label>
+        <label>Word List (separated by commas)</label><textarea cols="60" rows="8" name="words" id="words">Flowers,Bees,Picnickers,Ants,Little Kid Crying,Holding Hands,Person Napping,A Balloon,Dogs,Frisbee,Stroller,Chess Players,Rollerskates,Musician,Juggler,Photographer,Painter,Plastic Bag in Tree,Squirrel,Pigeon,Bicycle Built for Two,Ice Cream,Sunbather,Person Reading Newspaper,Person Listening to Radio,Sidewalk Chalk,Hopscotch</textarea>
+    </fieldset>
 
-	<fieldset>
-		<legend>Free Space</legend>
-		<label>Include a free space? 
-			<select name="freespace" id="freespace">
-				<option value="true" selected="selected">Yes</option>
-				<option value="false">No</option>
-			</select>
-		</label>
-		<label>Free Space Text <input type="text" name="freespaceValue" id="freespaceValue" value="Park Bench"></label>
+    <fieldset>
+        <legend>Free Space</legend>
+        <label>Include a free space? 
+            <select name="freespace" id="freespace">
+                <option value="true" selected="selected">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </label>
+        <label>Free Space Text <input type="text" name="freespaceValue" id="freespaceValue" value="Park Bench"></label>
         <label>Free Space Description <input type="text" name="freespaceSubheadingValue" id="freespaceSubheadingValue" value="Free Space"></label>
-		<label>Free Space Placement
-			<select name="freespaceRandom" id="freespaceRandom">
-				<option value="true">Random</option>
-				<option value="false" selected="selected">Center</option>
-			</select>
-		</label>
-	</fieldset>
+        <label>Free Space Placement
+            <select name="freespaceRandom" id="freespaceRandom">
+                <option value="true">Random</option>
+                <option value="false" selected="selected">Center</option>
+            </select>
+        </label>
+    </fieldset>
 
-	<fieldset>
-		<legend>Card Size</legend>
-		<p>A 5x5 bingo card is traditional, but you can try other sizes</p>
-		<label>Number of Squares Wide <input type="text" name="width" id="width" value="5"></label>
-		<label>Number of Squares Tall <input type="text" name="height" id="height" value="5"></label>
-	</fieldset>
+    <fieldset>
+        <legend>Card Size</legend>
+        <p>A 5x5 bingo card is traditional, but you can try other sizes</p>
+        <label>Number of Squares Wide <input type="text" name="width" id="width" value="5"></label>
+        <label>Number of Squares Tall <input type="text" name="height" id="height" value="5"></label>
+    </fieldset>
 
-	
-	<fieldset>
-		<legend>Printing Options</legend>
-		<p>Select the <em>landscape</em> page layout when printing for best results</p>
-		<label>Number of cards to create <input type="text" name="number" id="number" value="10"></label>
-	</fieldset>
-	<label><input type="submit" value="Generate Bingo Cards"></label>
+    <fieldset>
+        <legend>Printing Options</legend>
+        <p>Select the <em>landscape</em> page layout when printing for best results</p>
+        <label>Number of cards to create <input type="text" name="number" id="number" value="10"></label>
+    </fieldset>
+    <label><input type="submit" value="Generate Bingo Cards"></label>
 </form>
 
 
