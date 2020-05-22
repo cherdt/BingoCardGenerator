@@ -7,14 +7,14 @@ removeEmptyElements = function (arr) {
         }
     }
     return newArray;
-}
+};
 
 QUnit.test("RemoveEmptyElements", function(assert) {
-	"use strict";
-	var testInput = ",,,A,,B,,,C,";
-	var testArray = testInput.split(",")
-	var cleanedArray = removeEmptyElements(testArray);
-	assert.equal(cleanedArray.length, 3, "Array has 3 elements")
+    "use strict";
+    var testInput = ",,,A,,B,,,C,";
+    var testArray = testInput.split(",");
+    var cleanedArray = removeEmptyElements(testArray);
+    assert.equal(cleanedArray.length, 3, "Array has 3 elements");
     assert.ok(cleanedArray[0] === "A", "First element is A");
     assert.ok(cleanedArray[1] === "B", "Second element is B");
     assert.ok(cleanedArray[2] === "C", "Third element is C");
