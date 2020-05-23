@@ -54,9 +54,7 @@ var bingoGenerator = {
     bingoCard: function (title, width, height, freespace, freespaceValue, freespaceSubheadingValue, freespaceRandom, list) {
         "use strict";
         var possibleSpaces, enoughSpaces, spaces, centerSquare, i, j, output;
-        list = bingoGenerator.escapeHTML(list);
-        list = bingoGenerator.newlineToBR(list);
-        possibleSpaces = bingoGenerator.removeEmptyElements(list.split(","));
+        possibleSpaces = bingoGenerator.wordList(list);
 
         // Two options for including random Free Space:
         // Option 1: We don't have enough. Include in random placement.
@@ -158,6 +156,12 @@ var bingoGenerator = {
         // Jump to results
         location.href = '#results';
 
+    },
+
+    wordList: function(str) {
+        list = bingoGenerator.escapeHTML(str);
+        list = bingoGenerator.newlineToBR(list);
+        return bingoGenerator.removeEmptyElements(list.split(","));
     },
 
     // Replace + with spaces, <> with entities, and URL-decode &/,:;+=?%$
