@@ -160,6 +160,10 @@ var bingoGenerator = {
 
     wordList: function(str) {
         list = bingoGenerator.escapeHTML(str);
+        list = bingoGenerator.removeLeadingNewlines(list);
+        list = bingoGenerator.removeTrailingNewlines(list);
+        list = bingoGenerator.removeStartOfFileNewlines(list);
+        list = bingoGenerator.removeEndOfFileNewlines(list);
         list = bingoGenerator.newlineToBR(list);
         return bingoGenerator.removeEmptyElements(list.split(","));
     },
@@ -173,6 +177,26 @@ var bingoGenerator = {
     escapeHTML: function (str) {
         "use strict";
         return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    },
+
+    removeLeadingNewlines: function (str) {
+        "use strict";
+        return str.replace(/,\n+/g, ",");
+    },
+
+    removeTrailingNewlines: function (str) {
+        "use strict";
+        return str.replace(/\n+,/g, ",");
+    },
+
+    removeEndOfFileNewlines: function (str) {
+        "use strict";
+        return str.replace(/\n+$/g, "");
+    },
+
+    removeStartOfFileNewlines: function (str) {
+        "use strict";
+        return str.replace(/^\n+/g, "");
     },
 
     newlineToBR: function (str) {
