@@ -323,6 +323,14 @@ var bingoGenerator = {
         if (!(qs.pageBreaks === undefined)) {
             bingoGenerator.pageBreaks = qs.pageBreaks;
         }
+        if (qs.onlyCard === "true") {
+            $("#number").val(1);
+            $("h1").hide();
+            $("form").hide();
+            $("#footer").hide();
+            $("body").css("margin", 0);
+            $("table").css("margin", 0);
+        }
         if (!(qs.title === undefined) && !(qs.words === undefined)) {
             bingoGenerator.generate();
             dauber.init();
