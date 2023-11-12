@@ -246,10 +246,23 @@ var bingoGenerator = {
 
     },
 
-    // Replace + with spaces, <> with entities, and URL-decode &/,:;+=?%$
+    // Replace + with spaces, <> with entities, and URL-decode &/,:;+=?%$@
     urlUnencode: function (str) {
         "use strict";
-        return decodeURI(str).replace(/</g, "&lt;").replace(/\+/g, " ").replace(/%24/g, "$").replace(/%25/g, "%").replace(/%26/g, "&").replace(/%2B/g, "+").replace(/%2C/g, ",").replace(/%2F/g, "/").replace(/%3A/g, ":").replace(/%3B/g, ";").replace(/%3C/g, "&lt;").replace(/%3D/g, "=").replace(/%3F/g, "?");
+        return decodeURI(str).replace(/</g, "&lt;").
+                              replace(/\+/g, " ").
+                              replace(/%24/g, "$").
+                              replace(/%25/g, "%").
+                              replace(/%26/g, "&").
+                              replace(/%2B/g, "+").
+                              replace(/%2C/g, ",").
+                              replace(/%2F/g, "/").
+                              replace(/%3A/g, ":").
+                              replace(/%3B/g, ";").
+                              replace(/%3C/g, "&lt;").
+                              replace(/%3D/g, "=").
+                              replace(/%3F/g, "?").
+                              replace(/%40/g, "@");
     },
 
     escapeHTML: function (str) {
